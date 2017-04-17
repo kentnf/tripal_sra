@@ -1,0 +1,17 @@
+name = Tripal SRA
+description = A module similar to SRA database, including load sample, project, and experiment to chado database
+core = 7.x
+version = 7.x-0.1-dev
+project = tripal_sra
+package = Tripal Extensions
+configure = admin/tripal/extension/tripal_sra
+
+dependencies[] = tripal_core
+dependencies[] = tripal_views
+dependencies[] = tripal_db
+dependencies[] = tripal_cv
+dependencies[] = tripal_analysis
+dependencies[] = tripal_feature
+dependencies[] = tripal_organism
+dependencies[] = tripal_contact
+
