@@ -26,9 +26,9 @@ if (property_exists($variables['node'],'biosample')) {
 
   // The organism from which the biosample was collected
   if($biosample->taxon_id) {
-    $organism =  '<i>' . $biosample->taxon_id->genus . ' ' . $biosample->taxon_id->species . '</i> (' . $biosample->taxon_id->common_name . ')';
+    $organism =  '<i>' . $biosample->taxon_id->genus . ' ' . $biosample->taxon_id->species . '</i>';
     if (property_exists($biosample->taxon_id, 'nid')) {
-      $organism =  l('<i>' . $biosample->taxon_id->genus . ' ' . $biosample->taxon_id->species . '</i> (' . $biosample->taxon_id->common_name . ')', 'node/' . $biosample->taxon_id->nid, array('html' => TRUE));
+      $organism =  l('<i>' . $biosample->taxon_id->genus . ' ' . $biosample->taxon_id->species . '</i>', 'node/' . $biosample->taxon_id->nid, array('html' => TRUE));
     }
     $rows[] = array(
       array(

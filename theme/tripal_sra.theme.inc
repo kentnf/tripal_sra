@@ -10,14 +10,10 @@ function tripal_sra_preprocess_tripal_bioproject_experiments(&$variables) {
     LEFT JOIN chado.biomaterial S ON EX.biomaterial_id = S.biomaterial_id
     LEFT JOIN chado.organism O ON S.taxon_id = O.organism_id
     WHERE project_id = :bioproject_id";
-  $results = db_query($sql, array(':bioproject_id'=> $bioproject_id))->fetchObject();;
+  $results = db_query($sql, array(':bioproject_id'=> $bioproject_id))->fetchAll();;
 
-  if ($results) {
-    $experiments = array();
-    foreach ($results as $record) {
-      $experiments[] = $record;
-    }
-    $variables['experiment'] = $experiments;
+  if (sizeof($results) > 0) {
+    $variables['experiment'] = $results;
   }
 }
 

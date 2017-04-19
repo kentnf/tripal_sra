@@ -174,7 +174,7 @@ function chado_experiment_form($node, &$form_state) {
   );
 
   $form['rank'] = array(
-    '#title' => t('Rank (Biological Replicate Number)'),
+    '#title' => t('Rank (0 for Combined; > 0 for Biological Replicate)'),
     '#type' => 'textfield',
     '#empty_value' => '',
     '#default_value' => $rank,
