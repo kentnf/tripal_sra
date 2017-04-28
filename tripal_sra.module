@@ -21,6 +21,7 @@ require_once "includes/tripal_sra.chado.node.inc";
 require_once "api/tripal_bioproject.api.inc";
 require_once "includes/tripal_biosample.chado_node.inc";
 require_once "includes/tripal_biosample.admin.inc";
+require_once "includes/tripal_biosample_loader.inc";
 
 // node bioproject 
 require_once "includes/tripal_bioproject.chado_node.inc";
@@ -29,6 +30,7 @@ require_once "includes/tripal_bioproject.admin.inc";
 // node experiment
 require_once "includes/tripal_experiment.chado_node.inc";
 require_once "includes/tripal_experiment.admin.inc";
+require_once "includes/tripal_experiment_loader.inc";
 
 // theme preprocessing
 require_once "theme/tripal_sra.theme.inc";
@@ -297,15 +299,30 @@ function tripal_sra_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
 
-  // biosample settings.
-  $items['admin/tripal/extension/tripal_sra/biosample/configuration'] = array(
-    'title' => 'Settings',
-    'description' => 'Manage Tripal SRA: Biosample settings and configurations.',
+  // biosample loader from txt file.
+  $items['admin/tripal/extension/tripal_sra/biosample/biosample_loader'] = array(
+    'title' => 'Load',
+    'description' => 'Load biosamples into database from tab delimit file.',
     'access arguments' => array('administer'),
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('tripal_biosample_admin'),
+    'page arguments' => array('tripal_biosample_loader'),
     'type' => MENU_LOCAL_TASK,
-    'weight' => 5,
+    'weight' => 2,
+  );
+
+  // biosample sync node from chado database 
+  $items['admin/tripal/extension/tripal_sra/biosample/sync'] = array(
+    'title' => 'Sync',
+    'description' => 'Create pages on this site for BioSamples stored in Chado.',
+    'access arguments' => array('administer'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array(
+      'chado_node_sync_form',
+      'tripal_sra',
+      'chado_biosample',
+    ),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
   );
 
   // biosample TOC.
@@ -332,6 +349,17 @@ function tripal_sra_menu() {
     'file path' => drupal_get_path('module', 'tripal_sra'),
     'file' => 'includes/tripal_biosample.delete.inc',
     'weight' => 3,
+  );
+
+  // biosample settings.
+  $items['admin/tripal/extension/tripal_sra/biosample/configuration'] = array(
+    'title' => 'Settings',
+    'description' => 'Manage Tripal SRA: Biosample settings and configurations.',
+    'access arguments' => array('administer'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tripal_biosample_admin'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 5,
   );
 
   // biosample help.
@@ -366,6 +394,32 @@ function tripal_sra_menu() {
     'access arguments' => array('administer'),
     'page callback' => 'tripal_experiment_admin_experiments_view',
     'type' => MENU_NORMAL_ITEM,
+  );
+
+  // biosample loader from txt file.
+  $items['admin/tripal/extension/tripal_sra/experiment/experiment_loader'] = array(
+    'title' => 'Load',
+    'description' => 'Load Experiments into database from tab delimit file.',
+    'access arguments' => array('administer'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tripal_experiment_loader'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+
+  // biosample sync node from chado database 
+  $items['admin/tripal/extension/tripal_sra/experiment/sync'] = array(
+    'title' => 'Sync',
+    'description' => 'Create pages on this site for Experiments stored in Chado.',
+    'access arguments' => array('administer'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array(
+      'chado_node_sync_form',
+      'tripal_sra',
+      'chado_experiment',
+    ),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
   );
 
   // experiment settings.
@@ -415,17 +469,6 @@ function tripal_sra_menu() {
     'type' => MENU_LOCAL_TASK,
     'weight' => 10,
   );
-
-  /*
-  // Expression display on feature pages.
-  $items['admin/tripal/extension/tripal_analysis_expression/manage'] = array(
-    'title' => 'Tripal Expression Analysis Settings',
-    'description' => 'Manage the display of expression information.',
-    'access arguments' => array('administer tripal analysis expression'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('tripal_analysis_expression_config_admin'),
-  );
-  */
 
   return $items;
 }

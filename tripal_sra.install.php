@@ -236,6 +236,13 @@ function tripal_sra_schema() {
  */
 function tripal_sra_add_cvterms() {
 
+  // insert tripal sra db
+  $values = array (
+    'name' => 'tripal_sra',
+    'description' => 'db for tripal sra module, used for adding cvterm for tripal sra module',
+  );
+  tripal_insert_db($values);
+
   // CVs for the bioproject content type.
   tripal_insert_cv(
     'bioproject_property',
@@ -258,17 +265,18 @@ function tripal_sra_add_cvterms() {
 
   tripal_insert_cvterm(array(
     'name' => 'bioproject_accession',
-    'def' => 'The accession number of the BioProject(s) to which the BioSample belongs. If the BioSample belongs to more than one BioProject, enter multiple bioproject_accession columns. A valid BioProject accession has prefix PRJN, PRJE or PRJD, e.g., PRJNA12345.',
+    'definition' => 'The accession number of the BioProject(s) to which the BioSample belongs. If the BioSample belongs to more than one BioProject, enter multiple bioproject_accession columns. A valid BioProject accession has prefix PRJN, PRJE or PRJD, e.g., PRJNA12345.',
     'cv_name' => 'biosample_property',
     'db_name' => 'tripal_sra',
   ));
 
-  // insert tripal sra db
-  $values = array (
-    'name' => 'tripal_sra',
-    'description' => 'db for tripal sra module, used for adding cvterm for tripal sra module',
-  ); 
-  tripal_insert_db($values);
+  // experimental design for bioproject_property
+  tripal_insert_cvterm(array(
+    'name' => 'experimental_design',
+    'definition' => 'matrix of experimental_design for RNASeq',
+    'cv_name' => 'bioproject_property',
+    'db_name' => 'tripal_sra',
+  ));
 
   // reference https://www.ncbi.nlm.nih.gov/books/NBK54015/#BioProject-Help.Submitting_to_BioProject
   // bioproject_data_type
@@ -297,14 +305,14 @@ function tripal_sra_add_cvterms() {
   foreach ($datatypes as $datatype => $description) {
     tripal_insert_cvterm(array(
       'name' => 'dp_' . $datatype,
-      'def' => $description,
+      'definition' => $description,
       'cv_name' => 'bioproject_data_type',
       'db_name' => 'tripal_sra',
     ));
   }
   tripal_insert_cvterm(array(
     'name' => 'bioproject_data_type',
-    'def' => 'bioproject_sample_scope other desc',
+    'definition' => 'bioproject_data_type other desc',
     'cv_name' => 'bioproject_property',
     'db_name' => 'tripal_sra',
   ));
@@ -319,14 +327,14 @@ function tripal_sra_add_cvterms() {
   foreach ($sample_scopes as $scope) {
     tripal_insert_cvterm(array(
       'name' => 'ss_' . $scope,
-      'def' => $scope,
+      'definition' => $scope,
       'cv_name' => 'bioproject_sample_scope',
       'db_name' => 'tripal_sra',
     ));
   }
   tripal_insert_cvterm(array(
     'name' => 'bioproject_sample_scope',
-    'def' => 'bioproject_sample_scope other desc',
+    'definition' => 'bioproject_sample_scope other desc',
     'cv_name' => 'bioproject_property',
     'db_name' => 'tripal_sra',
   ));
@@ -340,14 +348,14 @@ function tripal_sra_add_cvterms() {
   foreach ($materials as $material) {
     tripal_insert_cvterm(array(
       'name' => 'm_' . $material,
-      'def' => $material,
+      'definition' => $material,
       'cv_name' => 'bioproject_material',
       'db_name' => 'tripal_sra',
     ));
   }
   tripal_insert_cvterm(array(
     'name' => 'bioproject_material',
-    'def' => 'bioproject_material other desc',
+    'definition' => 'bioproject_material other desc',
     'cv_name' => 'bioproject_property',
     'db_name' => 'tripal_sra',
   ));
@@ -361,7 +369,7 @@ function tripal_sra_add_cvterms() {
   foreach ($captures as $capture) {
     tripal_insert_cvterm(array(
       'name' => 'c_' . $capture,
-      'def' => $capture,
+      'definition' => $capture,
       'cv_name' => 'bioproject_capture',
       'db_name' => 'tripal_sra',
     ));
@@ -369,7 +377,15 @@ function tripal_sra_add_cvterms() {
 
   tripal_insert_cvterm(array(
     'name' => 'bioproject_capture',
-    'def' => 'bioproject_capture other desc',
+    'definition' => 'bioproject_capture other desc',
+    'cv_name' => 'bioproject_property',
+    'db_name' => 'tripal_sra',
+  ));
+
+  // bioproject_design
+  tripal_insert_cvterm(array(
+    'name' => 'bioproject_design',
+    'definition' => 'bioproject experiment design',
     'cv_name' => 'bioproject_property',
     'db_name' => 'tripal_sra',
   ));
@@ -403,7 +419,7 @@ function tripal_sra_add_cvterms() {
   foreach ($platforms as $platform => $description) {
     tripal_insert_cvterm(array(
       'name' => $platform,
-      'def' => $description,
+      'definition' => $description,
       'cv_name' => 'experiment_platform',
       'db_name' => 'tripal_sra',
     ));
@@ -448,7 +464,7 @@ function tripal_sra_add_cvterms() {
   foreach ($strategies as $strategy => $description) {
     tripal_insert_cvterm(array(
       'name' => $strategy,
-      'def' => $description,
+      'definition' => $description,
       'cv_name' => 'experiment_strategy',
       'db_name' => 'tripal_sra',
     ));
@@ -473,7 +489,7 @@ function tripal_sra_add_cvterms() {
   foreach ($sources as $source => $description) {
     tripal_insert_cvterm(array(
       'name' => $source,
-      'def' => $description,
+      'definition' => $description,
       'cv_name' => 'experiment_source',
       'db_name' => 'tripal_sra',
     ));
@@ -518,7 +534,7 @@ function tripal_sra_add_cvterms() {
   foreach ($selections as $selection => $description) {
     tripal_insert_cvterm(array(
       'name' => $selection,
-      'def' => $description,
+      'definition' => $description,
       'cv_name' => 'experiment_selection',
       'db_name' => 'tripal_sra',
     ));
@@ -532,14 +548,14 @@ function tripal_sra_add_cvterms() {
 
   tripal_insert_cvterm(array(
     'name' => 'PAIRED',
-    'def' => 'paired-end library',
+    'definition' => 'paired-end library',
     'cv_name' => 'experiment_layout',
     'db_name' => 'tripal_sra',
   ));
 
   tripal_insert_cvterm(array(
-    'name' => 'FRAGMET',
-    'def' => 'single-end library',
+    'name' => 'FRAGMENT',
+    'definition' => 'single-end library',
     'cv_name' => 'experiment_layout',
     'db_name' => 'tripal_sra',
   ));
@@ -564,7 +580,7 @@ function tripal_sra_add_cvterms() {
   foreach ($exp_props as $exp_prop => $description) {
     tripal_insert_cvterm(array(
       'name' => $exp_prop,
-      'def' => $description,
+      'definition' => $description,
       'cv_name' => 'experiment_property',
       'db_name' => 'tripal_sra',
     ));
@@ -582,7 +598,7 @@ function tripal_sra_add_cvterms() {
   foreach ($xml_obj->Attribute as $attribute) {
     tripal_insert_cvterm(array(
       'name' => $attribute->HarmonizedName,
-      'def' => $attribute->Description,
+      'definition' => $attribute->Description,
       'cv_name' => 'biosample_property',
       'db_name' => 'tripal_sra',
     ));
