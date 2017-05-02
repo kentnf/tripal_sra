@@ -369,10 +369,10 @@ function chado_biosample_load($nodes) {
  
     // Add the description field,
     $nodes[$nid]->biosample = $biosample;
+    $nodes[$nid]->biomaterial = $biosample;
 
     // Get title the node title.
-    //$node->title = chado_get_node_title($node); 
-    $node->title = $biosample->name;
+    $node->title = chado_get_node_title($node); 
   } 
 } 
 
@@ -405,20 +405,16 @@ function tripal_biosample_node_insert($node) {
   
   switch ($node->type) {
     case 'chado_biosample':
-  
       // Find the a biomaterial and add details.     
       $biosample_id = chado_get_id_from_nid('biomaterial', $node->nid, 'chado_biosample');
       $values = array('biomaterial_id' => $biosample_id);
       $biosample = chado_generate_var('biomaterial', $values);
       $node->biosample = $biosample;
-     
+      $node->biomaterial = $biosample;
       // Set the node title.  
-      //$node->title = chado_get_node_title($node);
-      $node->title = $biosample->name;
-     
+      $node->title = chado_get_node_title($node);
       // Set the URL path.  
       chado_set_node_url($node);
-    
       break;
   }
 }
@@ -433,13 +429,8 @@ function tripal_biosample_node_update($node) {
   
   switch ($node->type) {
     case 'chado_biosample':
-      
-      // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $biosample->name;
-      // Set the URL path.  
+      $node->title = chado_get_node_title($node);
       chado_set_node_url($node);
-    
       break; 
   }
 } 

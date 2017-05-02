@@ -394,8 +394,7 @@ function chado_experiment_load($nodes) {
     }
 
     // Get title the node title.
-    //$node->title = chado_get_node_title($node); 
-    $node->title = $experiment->name;
+    $node->title = chado_get_node_title($node); 
   } 
 } 
 
@@ -420,10 +419,8 @@ function chado_experiment_chado_node_default_url_format() {
  * @ingroup tripal_experiment
  */ 
 function tripal_experiment_node_insert($node) {
-  dpm($node, 'insert node1');
   switch ($node->type) {
     case 'chado_experiment':
-      dpm($node, 'insert node2');
       // Find the a experiment and add details.     
       $experiment_id = chado_get_id_from_nid('experiment', $node->nid, 'chado_experiment');
       $values = array('experiment_id' => $experiment_id);
@@ -431,8 +428,8 @@ function tripal_experiment_node_insert($node) {
       $node->experiment = $experiment;
      
       // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $experiment->name;     
+      $node->title = chado_get_node_title($node);
+
       // Set the URL path.  
       chado_set_node_url($node);
     
@@ -447,16 +444,10 @@ function tripal_experiment_node_insert($node) {
  * @ingroup tripal_experiment
  */
 function tripal_experiment_node_update($node) {
-  dpm($node, 'update node1');
   switch ($node->type) {
     case 'chado_experiment':
-      dpm($node, 'update node2');      
-      // Set the node title.  
       $node->title = chado_get_node_title($node);
-      $node->title = $experiment->name; 
-      // Set the URL path.  
       chado_set_node_url($node);
-    
       break; 
   }
 } 

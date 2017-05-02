@@ -24,7 +24,7 @@ function tripal_bioproject_admin() {
     'module' => 'tripal_sra',
     'content_type' => 'chado_bioproject',
     'options' => array(
-      '[project.name]' => 'BioProject Name Only'
+      '[project.name]' => 'BioProject Name Only ([project.name])'
     ),
     'unique_option' => '[project.name]' //*** fix  me
   );
@@ -34,7 +34,8 @@ function tripal_bioproject_admin() {
     'module' => 'tripal_sra',
     'content_type' => 'chado_bioproject',
     'options' => array( //*** fix these
-      '/bioproject/[project.project_id]' => 'BioProject ID',
+      '/bioproject/[project.project_id]' => 'BioProject ID ([project.project_id])',
+      '/bioproject/[project.name]' => 'BioProject Name ([project.name])',
     ),
   );
   chado_add_admin_form_set_url($form, $form_state, $details);

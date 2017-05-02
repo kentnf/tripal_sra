@@ -345,6 +345,7 @@ function chado_bioproject_load($nodes) {
     // Add the description field,
     //$arraydesign = chado_expand_var($arraydesign, 'field', 'arraydesign.description');
     $nodes[$nid]->bioproject = $bioproject;
+    $nodes[$nid]->project = $bioproject;
 
     if (sizeof($bioproject->projectprop) > 0 ) {
       foreach ($bioproject->projectprop as $pp) {
@@ -355,8 +356,7 @@ function chado_bioproject_load($nodes) {
     }
 
     // Get title the node title.
-    // $node->title = chado_get_node_title($node); 
-    $node->title = $bioproject->name;
+    $node->title = chado_get_node_title($node); 
   } 
 } 
 
@@ -381,19 +381,16 @@ function chado_bioproject_chado_node_default_url_format() {
  * @ingroup tripal_bioproject
  */ 
 function tripal_bioproject_node_insert($node) {
-  dpm($node, 'insert node1');
   switch ($node->type) {
     case 'chado_bioproject':
-      dpm($node, 'insert node2');
       // Find the a biomaterial and add details.     
       $bioproject_id = chado_get_id_from_nid('project', $node->nid, 'chado_bioproject');
       $values = array('project_id' => $bioproject_id);
       $bioproject = chado_generate_var('project', $values);
       $node->bioproject = $bioproject;
-     
+      $node->project = $bioproject;     
       // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $bioproject->name;     
+      $node->title = chado_get_node_title($node);
 
       // Set the URL path.  
       chado_set_node_url($node);
@@ -409,17 +406,10 @@ function tripal_bioproject_node_insert($node) {
  * @ingroup tripal_bioproject
  */
 function tripal_bioproject_node_update($node) {
-  dpm($node, 'update node1');
   switch ($node->type) {
     case 'chado_bioproject':
-      dpm($node, 'update node2');      
-      // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $bioproject->name;      
-
-      // Set the URL path.  
+      $node->title = chado_get_node_title($node);
       chado_set_node_url($node);
-    
       break; 
   }
 } 

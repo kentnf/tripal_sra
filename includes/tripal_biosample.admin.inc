@@ -24,9 +24,9 @@ function tripal_biosample_admin() {
     'module' => 'tripal_sra',
     'content_type' => 'chado_biosample',
     'options' => array(
-      '[biosample.name]' => 'biosample Only'
+      '[biomaterial.name]' => 'BioSample Name Only ([biomaterial.name])'
     ),
-    'unique_option' => '[biosample.name]' //*** fix  me
+    'unique_option' => '[biomaterial.name]' //*** fix  me
   );
   chado_add_admin_form_set_title($form, $form_state, $details);
 
@@ -34,8 +34,8 @@ function tripal_biosample_admin() {
     'module' => 'tripal_sra',
     'content_type' => 'chado_biosample',
     'options' => array( //*** fix these
-      '/biosample/[biosample.biosample_id]' => 'biosample ID',
-      '/biosample/[biosample.name]' => 'biosample Name'
+      '/biosample/[biomaterial.biomaterial_id]' => 'BioSample ID ([biomaterial.biomaterial_id])',
+      '/biosample/[biomaterial.name]' => 'BioSample Name (biomaterial.name)'
     ),
   );
   chado_add_admin_form_set_url($form, $form_state, $details);

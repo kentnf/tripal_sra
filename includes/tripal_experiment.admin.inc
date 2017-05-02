@@ -3,18 +3,18 @@
  * @file
  * 
  * This file contains the functions used for the administration
- * of the bioproject content type.
+ * of the experiment content type.
  * 
- * @ingroup tripal_bioproject
+ * @ingroup tripal_experiment
  */
 
 /**
- * Administrative page callbacks for the bioproject content type.
+ * Administrative page callbacks for the experiment content type.
  * 
  * @return
  *   A form API array describing an administrative form.
  *
- * @ingroup tripal_bioproject
+ * @ingroup tripal_experiment
  */
 function tripal_experiment_admin() {
 
@@ -22,37 +22,37 @@ function tripal_experiment_admin() {
   
   $details = array(
     'module' => 'tripal_sra',
-    'content_type' => 'chado_project',
+    'content_type' => 'chado_experiment',
     'options' => array(
-      '[biosample.name]' => 'biosample Only'
+      '[experiment.name]' => 'Experiment Name Only ([experiment.name])'
     ),
-    'unique_option' => '[biosample.name]' //*** fix  me
+    'unique_option' => '[experiment.name]' //*** fix  me
   );
   chado_add_admin_form_set_title($form, $form_state, $details);
 
   $details = array(
     'module' => 'tripal_sra',
-    'content_type' => 'chado_biosample',
+    'content_type' => 'chado_experiment',
     'options' => array( //*** fix these
-      '/biosample/[biosample.biosample_id]' => 'biosample ID',
-      '/biosample/[biosample.name]' => 'biosample Name'
+      '/experiment/[experiment.experiment_id]' => 'Experiment ID ([experiment.experiment_id])',
+      '/experiment/[experiment.name]' => 'Experiment Name ([experiment.name])'
     ),
   );
   chado_add_admin_form_set_url($form, $form_state, $details);
 
   $form['ontologies'] = array(
-    '#title' => t('biosample Ontology Terms'),
+    '#title' => t('Experiment Ontology Terms'),
     '#type' => 'fieldset',
     '#description' => t('Configuration settings for ontology term display.'),
     '#collapsible' => TRUE,
    ); 
 
-  $form['ontologies']['chado_biosample_ontologies_to_display'] = array(
+  $form['ontologies']['chado_experiment_ontologies_to_display'] = array(
     '#title' => t('Ontologies to Display'),
     '#description' => t('List the sequence ontologies for which cvterms should be displayed (if present)')
                       . t(' on the biosample page. Ontologies should be separated by a space or newline.'),
     '#type' => 'textarea',
-    '#default_value' => variable_get('chado_biosample_ontologies_to_display'),
+    '#default_value' => variable_get('chado_experiment_ontologies_to_display'),
   );
 
  return system_settings_form($form);
@@ -64,7 +64,7 @@ function tripal_experiment_admin() {
  * @return
  *   An HTML string that provides a link to enable the view.
  * 
- * @ingroup tripal_project
+ * @ingroup tripal_experiment
  */ 
 function tripal_experiment_admin_experiments_view() {
   $output = '';
@@ -76,11 +76,11 @@ function tripal_experiment_admin_experiments_view() {
   $breadcrumb[] = l('Tripal', 'admin/tripal');
   $breadcrumb[] = l('Extensions', 'admin/tripal/extension');
   $breadcrumb[] = l('Tripal SRA', 'admin/tripal/extension/tripal_sra');
-  $breadcrumb[] = l('BioProject', 'admin/tripal/extension/tripal_sra/bioproject');
+  $breadcrumb[] = l('Experiment', 'admin/tripal/extension/tripal_sra/experiment');
   drupal_set_breadcrumb($breadcrumb);
 
   // Add the view. 
-  $view = views_embed_view('tripal_bioproject_admin_bioproject', 'default');
+  $view = views_embed_view('tripal_experiment_admin_experiment', 'default');
   if (isset($view)) {
     $output .= $view;
   }
@@ -90,7 +90,7 @@ function tripal_experiment_admin_experiments_view() {
       . 'administrative interface are disabled. <br><strong>Click each of the following links to ' 
       . 'enable the pertinent views</strong>:</b>'; //*** fix this wording
     $output .= '<ul>';
-    $output .= '<li>' . l('BioProject View', 'admin/tripal/extension/tripal_sra/bioproject/views/bioprojects/enable') . '</li>';
+    $output .= '<li>' . l('Experiment View', 'admin/tripal/extension/tripal_sra/experiment/views/experiments/enable') . '</li>';
     $output .= '</ul>';
   }
   return $output;

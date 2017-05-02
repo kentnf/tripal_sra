@@ -22,6 +22,7 @@ require_once "api/tripal_bioproject.api.inc";
 require_once "includes/tripal_biosample.chado_node.inc";
 require_once "includes/tripal_biosample.admin.inc";
 require_once "includes/tripal_biosample_loader.inc";
+require_once "includes/tripal_biosample_sync.inc";
 
 // node bioproject 
 require_once "includes/tripal_bioproject.chado_node.inc";
@@ -31,7 +32,7 @@ require_once "includes/tripal_bioproject.admin.inc";
 require_once "includes/tripal_experiment.chado_node.inc";
 require_once "includes/tripal_experiment.admin.inc";
 require_once "includes/tripal_experiment_loader.inc";
-
+require_once "includes/tripal_experiment_sync.inc";
 // theme preprocessing
 require_once "theme/tripal_sra.theme.inc";
 
