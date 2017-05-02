@@ -1,6 +1,6 @@
 <?php
 
-dpm($variables); // debug
+//dpm($variables); // debug
 
 // This conditional is added to prevent errors in the biosample TOC admin page.
 if (property_exists($variables['node'],'biosample')) {

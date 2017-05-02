@@ -1,5 +1,7 @@
 <?php
 
+// dpm($variables); // for debug
+
 // This line is added so that no errors show in the TOC admin page. 
 $experiments = $variables['experiment'];
 if (sizeof($experiments) > 0) {
@@ -12,9 +14,9 @@ if (sizeof($experiments) > 0) {
 
   foreach ($experiments as $experiment) {
     $rows[] = array( 
-      $experiment->exp_name,
+      l($experiment->exp_name, 'experiment/' . $experiment->experiment_id),
       $experiment->description,
-      $experiment->sample_name,
+      l($experiment->sample_name, 'biosample/' . $experiment->biomaterial_id),
       $experiment->common_name,
     );
   }

@@ -6,7 +6,7 @@ function tripal_sra_preprocess_tripal_bioproject_experiments(&$variables) {
   $bioproject_id = $bioproject->project_id;
 
   // get all experiment from bioproject 
-  $sql = "SELECT EX.name as exp_name, EX.description, S.name as sample_name, O.common_name FROM chado.experiment EX
+  $sql = "SELECT EX.experiment_id, EX.name as exp_name, EX.description, S.biomaterial_id, S.name as sample_name, O.common_name FROM chado.experiment EX
     LEFT JOIN chado.biomaterial S ON EX.biomaterial_id = S.biomaterial_id
     LEFT JOIN chado.organism O ON S.taxon_id = O.organism_id
     WHERE project_id = :bioproject_id";

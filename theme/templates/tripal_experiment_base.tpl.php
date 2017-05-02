@@ -1,6 +1,6 @@
 <?php
 
-dpm($variables); // for debug
+// dpm($variables); // for debug
   
 // This conditional is added to prevent errors in the experiment TOC admin page.
 if (property_exists($variables['node'],'experiment')) {
@@ -18,7 +18,7 @@ if (property_exists($variables['node'],'experiment')) {
     array(
       'data' => 'Experiment Name',
       'header' => TRUE,
-      'width' => '20%',
+      'width' => '25%',
     ),
     $experiment->name
   );
@@ -28,16 +28,16 @@ if (property_exists($variables['node'],'experiment')) {
     array(
       'data' => 'BioProject Name',
       'header' => TRUE,
-      'width' => '20%',
+      'width' => '25%',
     ),
-    $experiment->project_id->name
+    l($experiment->project_id->name, 'bioproject/' . $experiment->project_id->project_id)
   );
 
   $rows[] = array(
     array(
       'data' => 'BioProject Description',
       'header' => TRUE,
-      'width' => '20%',
+      'width' => '25%',
     ),
     $experiment->project_id->description
   );
@@ -47,16 +47,16 @@ if (property_exists($variables['node'],'experiment')) {
     array(
       'data' => 'BioSample Name',
       'header' => TRUE,
-      'width' => '20%',
+      'width' => '25%',
     ),
-    $experiment->biomaterial_id->name
+    l($experiment->biomaterial_id->name, 'biosample/' . $experiment->biomaterial_id->biomaterial_id)
   );
 
   $rows[] = array(
     array(
       'data' => 'BioSample Description',
       'header' => TRUE,
-      'width' => '20%',
+      'width' => '30%',
     ),
     $experiment->biomaterial_id->description
   );

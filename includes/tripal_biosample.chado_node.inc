@@ -425,6 +425,7 @@ function tripal_biosample_node_insert($node) {
       $node->biomaterial = $biosample;
       // Set the node title.  
       $node->title = chado_get_node_title($node);
+      dpm($node->title, 'node title insert');
       // Set the URL path.  
       chado_set_node_url($node);
       break;
