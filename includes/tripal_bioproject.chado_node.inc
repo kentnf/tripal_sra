@@ -198,17 +198,29 @@ function chado_bioproject_validate($node, $form, &$form_state) {
     return;
   }
 
+  // Remove white space around field values.
+  // method 1. get bioproject info from bioproject node form which submit by user
+  $node->bioproject_name = trim($node->bioproject_name);
+  $node->description = trim($node->description);
+
+  // method 2. get biosample info from biomaterial table, which is for sync validate
+  // the biosample_id is from biomaterial table in sync process 
+  if (property_exists($node, 'project')) {
+    $project = $node->project;
+    if (property_exists($project, 'project_id') and empty($node->bioproject_name)) {
+      $node->bioproject_id   = $project->bioproject_id;
+      $node->bioproject_name = $project->name;
+      $node->description     = $project->description;
+    }
+  }
+
   // We are syncing if there is an bioproject_id but no node ID. In this case a 
   // validation is not required.  
   if (is_null($node->nid) and property_exists($node, 'bioproject_id') and $node->bioproject_id != 0) {
     return;
   } 
 
-  // Remove white space around field values.
-  $node->bioproject_name = trim($node->bioproject_name);
-  $node->description = trim($node->description);
-
- // Validate for an update.  
+  // Validate for an update.  
   if (property_exists($node, 'bioproject_id')) {
     $sql = "
       SELECT * 

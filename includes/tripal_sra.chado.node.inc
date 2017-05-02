@@ -93,12 +93,9 @@ function tripal_sra_node_insert($node) {
       $experiment = chado_generate_var('experiment', $values);
       $node->experiment = $experiment;
 
-      // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $experiment->name;
-      // Set the URL path.  
+      // Set the node title the URL path.  
+      $node->title = chado_get_node_title($node);
       chado_set_node_url($node);
-
       break;
 
     case 'chado_bioproject':
@@ -108,12 +105,10 @@ function tripal_sra_node_insert($node) {
       $values = array('project_id' => $bioproject_id);
       $bioproject = chado_generate_var('project', $values);
       $node->bioproject = $bioproject;
+      $node->project = $bioproject;
 
-      // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $bioproject->name;
-
-      // Set the URL path.  
+      // Set the node title and URL path.  
+      $node->title = chado_get_node_title($node);
       chado_set_node_url($node);
       break;
 
@@ -124,12 +119,10 @@ function tripal_sra_node_insert($node) {
       $values = array('biomaterial_id' => $biosample_id);
       $biosample = chado_generate_var('biomaterial', $values);
       $node->biosample = $biosample;
+      $node->biomaterial = $biosample;
 
-      // Set the node title.  
-      //$node->title = chado_get_node_title($node);
-      $node->title = $biosample->name;
-
-      // Set the URL path.  
+      // Set the node title and URL path.  
+      $node->title = chado_get_node_title($node);
       chado_set_node_url($node);
       break;
   }
@@ -144,34 +137,17 @@ function tripal_sra_node_update($node) {
 
   switch ($node->type) {
     case 'chado_experiment':
-
-      // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $experiment->name; 
-
-      // Set the URL path.  
+      $node->title = chado_get_node_title($node);
       chado_set_node_url($node);
-
       break;
 
     case 'chado_biosample':
-       
-      // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $biosample->name;
-
-      // Set the URL path.  
+      $node->title = chado_get_node_title($node);
       chado_set_node_url($node);
-
       break;
 
     case 'chado_bioproject':
-
-      // Set the node title.  
-      // $node->title = chado_get_node_title($node);
-      $node->title = $bioproject->name;
-
-      // Set the URL path.  
+      $node->title = chado_get_node_title($node);
       chado_set_node_url($node);
       break;
   }
@@ -200,6 +176,9 @@ function tripal_sra_node_presave($node) {
         $node->title = $node->bioproject_name;
       }
       else {
+        if (property_exists($node, 'project')) {
+          $node->title = $node->project->name;
+        }
         if (property_exists($node, 'bioproject')) {
           $node->title = $node->bioproject->name;
         }
@@ -211,6 +190,9 @@ function tripal_sra_node_presave($node) {
         $node->title = $node->biosample_name;
       }
       else {
+        if (property_exists($node, 'biomaterial')) {
+          $node->title = $node->biomaterial->name;
+        }
         if (property_exists($node, 'biosample')) {
           $node->title = $node->biosample->name;
         }

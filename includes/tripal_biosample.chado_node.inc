@@ -227,15 +227,27 @@ function chado_biosample_validate($node, $form, &$form_state) {
     return;
   }
 
+  // Remove white space around field values.
+  // method 1. get biosample info from biosample node form which submit by user
+  $node->biosample_name = trim($node->biosample_name);
+  $node->description = trim($node->description);
+
+  // method 2. get biosample info from biomaterial table, which is for sync validate
+  // the biosample_id is from biomaterial table in sync process 
+  if (property_exists($node, 'biomaterial')) {
+    $biomaterial = $node->biomaterial;
+    if (property_exists($biomaterial, 'biomaterial_id') and empty($node->biosample_name)) {
+      $node->biosample_id   = $biomaterial->biomaterial_id;
+      $node->biosample_name = $biomaterial->name;
+      $node->description    = $biomaterial->description;
+    }
+  }
+
   // We are syncing if there is an biomaterial_id but no node ID. In this case a 
-  // validation is not required.  
+  // validation is not required.
   if (is_null($node->nid) and property_exists($node, 'biosample_id') and $node->biosample_id != 0) {
     return;
   } 
-
-  // Remove white space around field values.
-  $node->biosample_name = trim($node->biosample_name);
-  $node->description = trim($node->description);
 
  // Validate for an update.  
   if (property_exists($node, 'biosample_id')) {

@@ -239,15 +239,16 @@ function chado_experiment_validate($node, $form, &$form_state) {
     return;
   }
 
+  // Remove white space around field values.
+  // method 1. get biosample info from biosample node form which submit by user
+  $node->experiment_name = trim($node->experiment_name);
+  $node->description = trim($node->description);
+
   // We are syncing if there is an experiment_id but no node ID. In this case a 
   // validation is not required.  
   if (is_null($node->nid) and property_exists($node, 'experiment_id') and $node->experiment_id != 0) {
     return;
   } 
-
-  // Remove white space around field values.
-  $node->experiment_name = trim($node->experiment_name);
-  $node->description = trim($node->description);
 
  // Validate for an update.  
   if (property_exists($node, 'experiment_id')) {
