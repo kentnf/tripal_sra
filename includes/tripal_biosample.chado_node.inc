@@ -68,6 +68,14 @@ function chado_biosample_node_access($node, $op, $account) {
  */
 function chado_biosample_form($node, $form_state) {
   $form = array();
+
+  // experimental design for bioproject_property
+  tripal_insert_cvterm(array(
+    'name' => 'experimental_design',
+    'definition' => 'matrix of experimental_design for RNASeq',
+    'cv_name' => 'bioproject_property',
+    'db_name' => 'tripal_sra',
+  ));
  
   // Not sure what this is for. Is this line necessary? 
   $form['#attribute']['enctype'] = 'multipart/form-data';
