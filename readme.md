@@ -11,7 +11,7 @@ original code
 692 $table = preg_replace('/chado_/', '', $content_type);
 
 ```
-insert code
+insert code behind line 691, delete line 692
 ````
           // kentnf: should use base table and linking_table here for universality
           // $table = preg_replace('/chado_/', '', $content_type);

@@ -45,7 +45,7 @@ function tripal_biosample_loader($form, &$form_state) {
       . t(' <b>Caution: If a biomaterial with the same name is already in the database,')
       . t(' this loader will update the biomaterial with the parameters set by this form.</b>'));
        
-  $organisms = tripal_get_organism_select_options(FALSE);
+  $organisms = tripal_sra_get_organism_select_options(FALSE);
 
   $form['organism_id'] = array(
     '#title' => t('Organism'),
@@ -305,7 +305,7 @@ function flat_biosample_parser($path, $org_id) {
         );
         $property = array(
           'type_name' => $name,
-          'cv_name' => 'biomaterial_property',
+          'cv_name' => 'biosample_property',
           'value' => $line[$index],
         );
         $options = array(

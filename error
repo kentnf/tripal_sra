@@ -1,0 +1,50 @@
+
+o results where the definition supplied was Array(    [name] => biomaterial_property)
+WD tripal_core: chado_insert_property: Cannot find the term described by: Array                               [error]
+(
+    [type_name] => collected_by
+    [cv_name] => biomaterial_property
+    [value] => Jan Kreuze
+)
+.
+[site http://default] [TRIPAL ERROR] [TRIPAL_CORE] chado_insert_property: Cannot find the term described by: Array(    [t
+ype_name] => collected_by    [cv_name] => biomaterial_property    [value] => Jan Kreuze).
+WD tripal_core: chado_select_record: the foreign key definition for 'cv_id' returned no results where the     [error]
+definition supplied was Array
+(
+    [name] => biomaterial_property
+)
+
+[site http://default] [TRIPAL ERROR] [TRIPAL_CORE] chado_select_record: the foreign key definition for 'cv_id' returned n
+o results where the definition supplied was Array(    [name] => biomaterial_property)
+WD tripal_core: chado_get_property: Cannot find the term described by: Array                                  [error]
+(
+    [type_name] => treatment
+    [cv_name] => biomaterial_property
+    [value] => treatment using DP
+)
+.
+[site http://default] [TRIPAL ERROR] [TRIPAL_CORE] chado_get_property: Cannot find the term described by: Array(    [type
+_name] => treatment    [cv_name] => biomaterial_property    [value] => treatment using DP).
+WD tripal_core: chado_select_record: the foreign key definition for 'cv_id' returned no results where the     [error]
+definition supplied was Array
+(
+    [name] => biomaterial_property
+)
+
+[site http://default] [TRIPAL ERROR] [TRIPAL_CORE] chado_select_record: the foreign key definition for 'cv_id' returned n
+o results where the definition supplied was Array(    [name] => biomaterial_property)
+WD tripal_core: chado_insert_property: Cannot find the term described by: Array                               [error]
+(
+    [type_name] => treatment
+    [cv_name] => biomaterial_property
+    [value] => treatment using DP
+)
+.
+[site http://default] [TRIPAL ERROR] [TRIPAL_CORE] chado_insert_property: Cannot find the term described by: Array(    [t
+ype_name] => treatment    [cv_name] => biomaterial_property    [value] => treatment using DP).
+
+Done.
+
+
+
