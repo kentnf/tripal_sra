@@ -12,7 +12,7 @@
  * the Analysis module.
  * @}
  */
-
+require_once "api/tripal_sra.api.inc";
 require_once "includes/tripal_sra.chado.node.inc";
 
 // change keyword biomaterial to biosample for: 
