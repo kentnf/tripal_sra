@@ -268,15 +268,16 @@ function flat_biosample_parser($path, $org_id) {
       if ($name == 'description') { 
         $description .= $line[$index];
       }
+
       if ($name == 'biomaterial_provider' and $line[$index] != "") { 
         $biosourceprovider_id = create_update_biosample_contact($line[$index]);
       }
       if ($name == 'organism') {
         $organism_id = find_biosample_taxon($line[$index]);
-        if ($organism_id != $org_id) {
-          print "The select organism $org_id do not match the organism of $unique_name: $organism_id\n";
-          exit;
-        }
+        //if ($organism_id != $org_id) {
+        //  print "The select organism $org_id do not match the organism of $unique_name: $organism_id\n";
+        //  exit;
+        //}
       }
     }
 
@@ -344,10 +345,13 @@ function find_biosample_taxon($organism) {
     return $organism;
   }
   else {
+    print "BUG point Y $organism\n";
     $organism_id = chado_query('select organims_id from {organims} where common_name = :common_name', array(':common_name' => $organism))->fetchField();
     if(!$organism_id) {
       print "Unable to find organism using common_name: $organism\n";  
+      exit;
     }
+    exit;
     return $organism_id;
   }
 }
