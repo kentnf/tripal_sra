@@ -185,7 +185,7 @@ function tripal_sra_node_presave($node) {
       }
       break;
 
-    case 'chado_biomsample':
+    case 'chado_biosample':
       if (property_exists($node, 'biosample_name')) {
         $node->title = $node->biosample_name;
       }

@@ -79,7 +79,7 @@ function chado_biosample_form($node, $form_state) {
  
   // Not sure what this is for. Is this line necessary? 
   $form['#attribute']['enctype'] = 'multipart/form-data';
- 
+
   // === get default value for the form ===
   if (property_exists($node, 'biosample')) {   
     $biosample = $node->biosample;
@@ -103,7 +103,7 @@ function chado_biosample_form($node, $form_state) {
     } 
    
     // Set the biomaterial id. 
-    $form['biomaterial_id'] = array(
+    $form['biosample_id'] = array(
       '#type' => 'value',
       '#value' => $biosample->biomaterial_id,
     );
@@ -257,7 +257,7 @@ function chado_biosample_validate($node, $form, &$form_state) {
     return;
   } 
 
- // Validate for an update.  
+  // Validate for an update.  
   if (property_exists($node, 'biosample_id')) {
     $sql = "
       SELECT * 

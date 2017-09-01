@@ -363,6 +363,7 @@ function tripal_sra_menu() {
   );
 
   // biosample enable view.
+  /**
   $items['admin/tripal/extension/tripal_sra/biosample/views/biosamples/enable'] = array(
     'title' => 'Enable Biosample Administrative View',
     'access arguments' => array('administer'),
@@ -373,6 +374,7 @@ function tripal_sra_menu() {
       'admin/tripal/extension/tripal_sra/biosample',
     ),
   );
+  */
 
   /**
    * experiment (aka experiment in SRA)

@@ -1,5 +1,4 @@
 <?php
-
 //dpm($variables); // debug
 
 // This conditional is added to prevent errors in the biosample TOC admin page.

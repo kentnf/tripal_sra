@@ -352,6 +352,7 @@ function chado_bioproject_load($nodes) {
     // Build the bioproject variable.
     $values = array('project_id' => $bioproject_id);
     $bioproject = chado_generate_var('project', $values);
+    $bioproject = chado_expand_var($bioproject, 'field', 'project.description');
     $bioproject = chado_expand_var($bioproject, 'table', 'projectprop'); 
 
     // Add the description field,

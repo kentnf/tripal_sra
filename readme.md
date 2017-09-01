@@ -36,3 +36,14 @@ insert code behind line 691, delete line 692
 
 ```
 
+
+
+sample	tissue	dap
+CU_28DAP	leaf	10
+CU_37DAP	leaf	20
+CU_37DAP	seed	10
+CU_37DAP	seed	20
+# DAP: days after pollination
+
+
+

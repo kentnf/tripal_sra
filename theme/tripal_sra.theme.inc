@@ -73,6 +73,14 @@ function tripal_sra_preprocess_tripal_analysis_biomaterial(&$variables) {
 
 function tripal_sra_preprocess_tripal_biosample_base(&$variables) {
 
+  // Build Breadcrumbs
+$breadcrumb = array();
+$breadcrumb[] = l('Home', '');
+$breadcrumb[] = l('Topics', 'taxonomy/term/1');
+$breadcrumb[] = l(drupal_get_title(), base_path() . request_uri()); // Link to current URL
+  drupal_set_breadcrumb($breadcrumb);
+
+
   $biomaterial_ontologies = variable_get('chado_biomaterial_ontologies_to_display');
   //  $biomaterial_ontologies = "sequence";
 
